@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+.basicbackground-color {
+    background-color: #333333;
+    color: white;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.second-content {
+	width:Auto 0;
+	height:70px;
+	
+}
+
+.button-custom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.signup-btn {
+    border: 2px solid black !important;
+    border-radius: 4px;
+}
+
+.icon-custom {
+    margin-right: 8px;
+}
+
+.icon-large {
+    width: 40px;
+    height: 40px;
+}
+
+.custom-container {
+    background-color: #202020; /* 어두운 배경색 */
+    border: 2px solid black;  /* 검정색 테두리 */
+    border-radius: 8px;       /* 둥근 모서리 */
+    max-width: 191px;         /* 컨테이너의 최대 너비 */
+    padding: 10px;            /* 내부 여백 */
+}
+
+.text-container {
+    margin-left: 10px;        /* 아이콘과 텍스트 사이 여백 */
+}
+
+.small {
+    font-size: 12px;          /* "Get it on" 텍스트 크기 */
+}
+
+h5 {
+    font-size: 18px;          /* "Google Play" 텍스트 크기 */
+    font-weight: bold;        /* 굵은 글씨 */
+    margin: 0;                /* 추가적인 간격 제거 */
+}
+
+
