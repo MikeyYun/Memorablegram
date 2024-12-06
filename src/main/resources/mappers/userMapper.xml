@@ -10,7 +10,7 @@
  			`loginId`
  			, `password`
  			, `name`
- 			, `email
+ 			, `email`
  		)
  		VALUE
  		(

@@ -93,6 +93,7 @@
 	</section>
 	</body>
 	<script layout:fragment="script">
+	
 	$(document).ready(function() {
 		
 		$("#duplicatedBtn").on("click", function() {
@@ -105,7 +106,7 @@
 			
 			$.ajax({
 				type:"get"
-				, url:"/user/duplicated_id"
+				, url:"/user/duplicated-id"
 				, data:{"loginId":id}
 				, success:function(response) {
 					if(response.isDuplicated) {
@@ -138,7 +139,7 @@
 				alert("Please enter your password");
 				return;
 			}
-			if(password != passwordConfirmInput) {
+			if(password != passwordConfirm) {
 				alert("Passwords do not match.");
 				return;
 			}
