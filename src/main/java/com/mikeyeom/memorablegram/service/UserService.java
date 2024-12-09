@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.mikeyeom.memorablegram.common.MD5HashingEncoder;
 import com.mikeyeom.memorablegram.common.SHA256HashingEncoder;
+import com.mikeyeom.memorablegram.domain.User;
 import com.mikeyeom.memorablegram.repository.UserRepository;
 
 @Service
@@ -41,6 +42,17 @@ public class UserService {
 		} else {
 			return false;
 		}
+	}
+	
+	public User getUser(
+			String loginId
+			, String password) {
+		
+	    String encodingPassword = MD5HashingEncoder.encode(password);
+		
+	    return userRepository.selectUser(loginId, encodingPassword);
+		
+		
 	}
 	
 }

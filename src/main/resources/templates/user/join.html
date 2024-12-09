@@ -69,7 +69,7 @@
 				    <div class="d-flex">
 				        <div>Have an account?</div>
 				        <div class="text-primary">
-				            <a href="/user/join-view" class="signup-link text-decoration-none">&nbsp;&nbsp;Log in</a>
+				            <a href="/user/login-view" class="signup-link text-decoration-none">&nbsp;&nbsp;Log in</a>
 				        </div>
 				    </div>
 				</div>
@@ -113,6 +113,16 @@
 	
 	$(document).ready(function() {
 		
+		var isDuplicatedCheck = false;
+		var isDuplicatedId = true;
+		
+		$("#idInput").on("input", function( ) {
+			isDuplicatedCheck = false;
+			isDuplicatedId = true;
+			$("#availableText").addClass("d-none");
+			$("#unavailableText").addClass("d-none");
+		});
+		
 		$("#duplicatedBtn").on("click", function() {
 			let id = $("#idInput").val();
 			
@@ -126,12 +136,18 @@
 				, url:"/user/duplicated-id"
 				, data:{"loginId":id}
 				, success:function(response) {
+					
+					isDuplicatedCheck = true;
+					
 					if(response.isDuplicated) {
 						$("#unavailableText").removeClass("d-none");
 						$("#availableText").addClass("d-none");
+						isDuplicatedId = true;
+						
 					} else {
 						$("#availableText").removeClass("d-none");
 						$("#unavailableText").addClass("d-none");
+						isDuplicatedId = false;
 					}
 				}
 				, error:function() {
@@ -152,6 +168,19 @@
 				alert("Please enter your ID");
 				return;
 			}
+			
+			// id 중복확인 안한 경우 
+			if(!isDuplicatedCheck) {
+				alert("Please check if the ID is available before proceeding.");
+				return ;
+			}
+			
+			// id가 중복된 경우 
+			if(isDuplicatedId) {
+				alert("That ID is already taken. Try another!");
+				return ;
+			}
+			
 			if(password == "") {
 				alert("Please enter your password");
 				return;

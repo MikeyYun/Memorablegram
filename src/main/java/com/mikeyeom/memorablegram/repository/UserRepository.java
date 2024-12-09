@@ -3,6 +3,8 @@ package com.mikeyeom.memorablegram.repository;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.mikeyeom.memorablegram.domain.User;
+
 @Mapper
 public interface UserRepository {
 	
@@ -13,4 +15,8 @@ public interface UserRepository {
 			, @Param("email") String email);
 	
 	public int selectCountLoginId(@Param("loginId") String loginId);
+	
+	public User selectUser(
+			@Param("loginId") String loginId
+			, @Param("password") String password);
 }

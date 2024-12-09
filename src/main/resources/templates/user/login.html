@@ -15,12 +15,14 @@
 						
 					</div>
 					
+				<form id="loginForm">
 					<div class="d-flex mt-5">
-						<input type="text" class="form-control text-white" placeholder="ID" id="idInput" style="background-color: #1a1a1a;">
+						<input type="text" class="form-control text-white" placeholder="ID" id="loginIdInput" style="background-color: #1a1a1a;">
 					</div>
-						<input type="password" class="form-control mt-3 text-white" placeholder="Password" id="passwordInput" style="background-color: #1a1a1a;">
+						<input type="password" class="form-control  mt-3 text-white" placeholder="Password" id="passwordInput" style="background-color: #1a1a1a;">
 					
-					<button type="button" class="btn btn-primary btn-block mt-3 signup-btn" id="signupBtn">Sign up</button>
+					<button type="submit" class="btn btn-primary btn-block mt-3" id="loginBtn">Log in</button>
+				</form>
 					<br>
 				<div class="line-container mt-2">
   					<div class="line"></div>
@@ -55,7 +57,7 @@
 				    <div class="d-flex">
 				        <div>Don't have an account?</div>
 				        <div class="text-primary">
-				            <a href="/user/join-view" class="signup-link text-decoration-none">&nbsp;&nbsp;Sign up</a>
+				            <a href="/user/join-view" class="text-decoration-none">&nbsp;&nbsp;Sign up</a>
 				        </div>
 				    </div>
 				</div>
@@ -103,16 +105,17 @@
 	
 	$(document).ready(function() {
 		
-		
-		
-		$("#signupBtn").on("click", function() {
-			let id = $("#idInput").val();
+		$("#loginForm").on("submit", function(e) {
+			e.preventDefault();
+			
+			let id = $("#loginIdInput").val();
 			let password = $("#passwordInput").val();
 			
 			if(id == "") {
 				alert("Please enter your ID");
 				return;
 			}
+			
 			if(password == "") {
 				alert("Please enter your password");
 				return;
@@ -120,13 +123,13 @@
 			
 			$.ajax({
 				type: "post"
-				, url: "/user/join"
+				, url: "/user/login"
 				, data:{"loginId":id, "password":password}
 				, success:function(response) {
 					if(response.result == "success") {
-						location.href="/user/login-view"
+						location.href="/post/timeline-view";	
 					} else {
-						alert("fail..");
+						alert("Check your Id and Password");
 					}
 				}
 				, error:function() {
