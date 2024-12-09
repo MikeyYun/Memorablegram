@@ -2,6 +2,7 @@ package com.mikeyeom.memorablegram.service;
 
 import org.springframework.stereotype.Service;
 
+import com.mikeyeom.memorablegram.common.MD5HashingEncoder;
 import com.mikeyeom.memorablegram.common.SHA256HashingEncoder;
 import com.mikeyeom.memorablegram.repository.UserRepository;
 
@@ -20,9 +21,9 @@ public class UserService {
 			, String name
 			, String email) {
 		
-		String encodingPassword = SHA256HashingEncoder.encode(password);
+		String encodingPassword = MD5HashingEncoder.encode(password);
 		
-		int count = userRepository.insertUser(loginId, password, name, email);
+		int count = userRepository.insertUser(loginId, encodingPassword, name, email);
 		
 		if(count == 1) {
 			return true;

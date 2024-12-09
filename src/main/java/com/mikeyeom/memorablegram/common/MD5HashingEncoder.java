@@ -3,12 +3,13 @@ package com.mikeyeom.memorablegram.common;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class SHA256HashingEncoder {
+public class MD5HashingEncoder {
 	
 	public static String encode(String message) {
+		
 		String result = "";
 		try {
-			MessageDigest messageDigest = MessageDigest.getInstance("sha256");
+			MessageDigest messageDigest = MessageDigest.getInstance("md5");
 			
 			byte[] bytes = message.getBytes();
 			
@@ -30,4 +31,3 @@ public class SHA256HashingEncoder {
 		
 	}
 }
-
