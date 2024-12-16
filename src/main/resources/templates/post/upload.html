@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko" 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/default}">
+    	
+    <body class="basicbackground-color">
+    	<section layout:fragment="contents" class="contents d-flex justify-content-center">
+    	<div class="contents-box my-5">
+    	<div>
+    		<div class="header-wrapper" style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); text-align: center; z-index: 1000;">
+   			<h1 class="memorablegram-title mt-2 justify-content-center">Memorablegram</h1>
+   		</div>
+    	
+
+    	</div>
+    		
+    		<div id="wrapper">
+    		    <textarea class="form-control my-4 textarea-bg" id="contentsInput" rows="4" cols="50" style="resize: none;" placeholder="내용을 입력하세요"></textarea>
+    		<div class="d-flex justify-content-between">
+    		    <input class="mt-2" type="file" id="fileInput">
+    		    	<button type="button" style="all: unset; cursor: pointer;">
+    		    	<i class="bi bi-upload" id="uploadBtn" style="font-size: 32px;"></i>
+				  	</button>
+				  		
+    		</div>
+    		    <div class="d-flex justify-content-between">
+    		    	<a href="/post/timeline-view" class="btn btn-primary mt-5 ">Back</a>
+    		    </div>
+    		</div>
+    	</div>
+    	
+    </section>
+    <script layout:fragment="script">
+    
+    $(document).ready(function () {
+    	$("#uploadBtn").on("click", function() {
+    		let contents = $("#contentsInput").val();
+    		
+    		let file = $("#fileInput")[0].files[0];
+    		
+    		if(contents == "") {
+    			alert("내용을 입력하세요.");
+    			return;
+    		}
+    		
+    		if(file == null) {
+    			alert("이미지를 선택해주세요.");
+    			return;
+    		}
+    		
+    		let formData = new FormData();
+    		
+    		formData.append("contents", contents);
+    		formData.append("imageFile", file);
+    		
+    		$.ajax({
+    			type: "post"
+    			, url: "/post/upload"
+    			, data:formData
+    			, enctype:"multipart/form-data"
+    			, processData:false
+    			, contentType:false
+    			, success:function(response) {
+    				if(response.result == "success") {
+    					location.href="/post/timeline-view";
+    				} else {
+    					alert("Couldn't upload post. Please try again.");
+    				}
+     			}
+    			, error:function() {
+    				alert("error...");
+    			}
+    		});
+    		
+    	});
+    });
+    
+    </script>
+    </body>

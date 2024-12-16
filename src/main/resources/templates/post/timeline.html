@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko" 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/default}">
+    
+<body class="basicbackground-color">
+
+    <section layout:fragment="contents" class="contents d-flex flex-column align-items-center">
+	        
+        <header class="header-wrapper">
+        	<div class="d-flex flex-column">
+        	
+        	<div oncontextmenu="return false" onselectstart="return false" ondragstart="return false" onkeydown="return false">
+        	<div class="d-flex">
+    			<h1 class="memorablegram-title p-4">Memorablegram</h1>
+    			
+    				<div class="d-flex align-items-center" style="gap:7rem;">
+       					<p class="bell" style="font-size:48px;color:red;">🔔</p>
+        				<p class="bell" style="font-size:36px; color:red;">🔔</p>
+        				<p class="" style="font-size:50px; font-family: serif;">🎄</p>
+        				<p style="font-size:45px;"> Merry Christmas</p>
+        				<p class="" style="font-size:50px;">🎄</p>
+        				<p class="bell" style="font-size:36px; color:red;">🔔</p>
+        				<p class="bell" style="font-size:48px;color:red;">🔔</p>
+    				</div>
+    		</div>
+    		</div>
+			</div>
+
+            <div>
+        <nav class="main-menu col-2 ml-3">
+		    <ul class="nav flex-column">
+		        <li class="nav-item menu-item">
+		            <a href="/post/timeline-view" class="nav-link text-white font-weight-bold" style="font-size: 20px;">
+		            <i class="bi bi-house-door"></i> Home
+		            </a>
+		        </li>
+		        <li class="nav-item menu-item">
+		            <a href="2" class="nav-link text-white font-weight-bold" style="font-size: 20px;">
+		            <i class="bi bi-search"></i> Search
+		            </a>
+		        </li>
+		        <li class="nav-item menu-item">
+		            <a href="/post/upload-view" class="nav-link text-white font-weight-bold" style="font-size: 20px;">
+		            <i class="bi bi-plus-square"></i> Create</a>
+		        </li>
+		        <li class="nav-item menu-item">
+		            <a href="/user/mypage-view" class="nav-link text-white font-weight-bold" style="font-size: 20px;">
+		            <i class="bi bi-person-circle"></i> Profile</a>
+		        </li>
+		        <li class="nav-item menu-item fixed-item" title="Log out from your account">
+				    <a href="5" class="nav-link text-white font-weight-bold">
+				        <i class="bi bi-door-closed-fill logout"></i> Log out
+				    </a>
+				</li>
+				</ul>
+			</nav>
+
+                </div>
+        </header>
+	
+        <div th:each="post:${postList}" class="photo-card border border-secondary rounded" style="width: 33rem; height: 45rem;">
+                
+                <div class="d-flex align-items-center p-3">
+                <div class="d-flex mt-">
+                    <a href="/user/userpage-view" class="text-decoration-none text-white">
+                        <i class="bi bi-person-circle icon-large"></i>
+                    </a>
+                    <h5 class="ml-3" ><span class="font-weight">siyuninkorea</span></h5>
+                    <span class="small mt-1 ml-2"> - 12m</span>
+                </div>
+                <span class="ml-auto"><i class="bi bi-three-dots-vertical"></i></span>
+             </div>
+             
+                <div class="photo-container mt-3">
+                    <img th:src="${post.imagePath}" 
+                        alt="Uploaded Image">
+                </div>
+                
+                <div class="line mt-4"></div>
+
+                
+                <div class="p-3">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-heart mr-3" style="font-size: 27px;"></i>
+                        <i class="bi bi-chat-square mr-3" style="font-size: 27px;"></i>
+                        <i class="bi bi-send" style="font-size: 27px;"></i>
+                    </div>
+                    
+                    
+                    <p class="card-text mb-2">
+                        Liked by <span class="font-weight-bold">siyuninkorea</span> and 
+                        <span class="font-weight-bold">125,000</span> others
+                        <br>
+                        <small class="seetranslate">See translate</small>
+                    </p>
+                    
+                    
+                    <div class="comment-box d-flex align-items-center mt-2">
+					    <div class="comment-text">
+					        <span class="font-weight-bold">siyuninkorea</span>
+					        <span class="ml-1">
+					            <span th:text="${post.contents}" class="short-text">
+					                You have to let go, Shu. You know I wouldn't ask you if it wasn't safe, right? It could be dangerous...
+					            </span>
+					            <span th:text="${post.contents}" class="full-text d-none">
+					                You have to let go, Shu. You know I wouldn't ask you if it wasn't safe, right? It could be dangerous if you don't know how to do this. it could be really really important and I may not there to help you, when that happens I have to make sure you can do it.
+					            </span>
+					        </span>
+					    </div>
+					    
+					    <div class="btn-container d-flex">
+					        <button class="btn-toggle-text btn btn-link p-0" style="text-decoration: none;">더보기</button>
+					        <button class="btn-toggle-text btn btn-link p-0 btn-hide d-none">숨기기</button>
+					    </div>
+					</div>
+					
+					
+					<div class="d-flex flex-column mt-3">
+					    <div class="view-comments cursor-pointer mt-3">
+					        View all comments
+					    </div>
+					   <div class="add-comment mt-2 d-flex flex-column">
+					   <div class="d-flex">
+					    <input 
+					        type="text" 
+					        class="container text-white p-0" 
+					        style="background-color: #111111; border: none; outline: none; padding-left: 0;" 
+					        placeholder="Add a comment..."><button style="background-color: #111111; border: none; outline: none; color:#0d6efd">post</button></div>
+					    <span class="line-container mt-2" style="border-top: 1px solid #555555;"></span>
+					</div>
+				</div>
+			 
+			 </div>
+			 </div>
+        
+    </section>
+</body>
+
+<script layout:fragment="script">
+    const maxShortText = 120;
+    const maxFullText = 180;
+
+    document.querySelectorAll(".comment-box").forEach((commentBox) => {
+        const shortText = commentBox.querySelector(".short-text");
+        const fullText = commentBox.querySelector(".full-text");
+        const btnContainer = commentBox.querySelector(".btn-container");
+        const btnShow = btnContainer.querySelector(".btn-toggle-text");
+        const btnHide = btnContainer.querySelector(".btn-hide");
+
+        if (fullText.textContent.length > maxShortText) {
+            const limitedText = fullText.textContent.substring(0, maxShortText) + "...";
+            shortText.textContent = limitedText;
+        } else {
+            shortText.textContent = fullText.textContent;
+        }
+
+        let isCollapsed = true;
+
+        btnShow.addEventListener("click", () => {
+            isCollapsed = !isCollapsed;
+            if (isCollapsed) {
+                shortText.classList.remove("d-none");
+                fullText.classList.add("d-none");
+                btnShow.textContent = "더보기";
+                btnHide.classList.add("d-none");
+            } else {
+                shortText.classList.add("d-none");
+                fullText.classList.remove("d-none");
+
+                if (fullText.textContent.length > maxFullText) {
+                    fullText.textContent = fullText.textContent.substring(0, maxFullText) + "...";
+                }
+
+                btnShow.classList.add("d-none");
+                btnHide.classList.remove("d-none");
+            }
+        });
+
+        btnHide.addEventListener("click", () => {
+            isCollapsed = !isCollapsed;
+
+            shortText.classList.remove("d-none");
+            fullText.classList.add("d-none");
+            btnHide.classList.add("d-none");
+            btnShow.classList.remove("d-none");
+            btnShow.textContent = "더보기";
+        });
+    });
+</script>
+</html>

@@ -3,17 +3,23 @@
 .basicbackground-color {
     background-color: #111111;
     color: white;
-    margin: 0;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
 }
 
 .memorablegram-title {
     font-family: 'Pacifico', cursive;
 }
 
+.memorablegram-timelone {
+	font-family: 'Pacifico', cursive;
+}
+
+.img-fluid {
+	width:400px;
+}
 
 .button-custom {
     display: flex;
@@ -40,43 +46,43 @@
 }
 
 .custom-container {
-    background-color: #111111; /* 어두운 배경색 */
-    border: 2px solid black;  /* 검정색 테두리 */
-    border-radius: 8px;       /* 둥근 모서리 */
+    background-color: #111111;
+    border: 2px solid black;
+    border-radius: 8px;
     max-width: 191px;  
 }
 
 .text-container {
-    margin-left: 10px;        /* 아이콘과 텍스트 사이 여백 */
+    margin-left: 10px;
 }
 
 .small {
-    font-size: 12px;          /* "Get it on" 텍스트 크기 */
+    font-size: 12px;
 }
 
 h5 {
-    font-size: 18px;          /* "Google Play" 텍스트 크기 */
-    font-weight: bold;        /* 굵은 글씨 */
-    margin: 0;                /* 추가적인 간격 제거 */
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
 }
 
 .line-container {
-  display: flex;             /* Flexbox 사용 */
-  align-items: center;       /* 수직 가운데 정렬 */
-  justify-content: center;   /* 가로 가운데 정렬 */
-  gap: 10px;                 /* 텍스트와 선 사이 간격 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .line {
-  flex: 1;                   /* 선이 가능한 한 확장 */
-  height: 1px;               /* 선 두께 설정 */
-  background-color: #2A2A2B;   /* 선 색상 */
+  flex: 1;
+  height: 1px;
+  background-color: #2A2A2B;
 }
 
 .text {
-  white-space: nowrap;       /* 텍스트 줄바꿈 방지 */
-  padding: 0 10px;           /* 텍스트 좌우 여백 */
-  font-size: 16px;           /* 텍스트 크기 설정 */
+  white-space: nowrap;
+  padding: 0 10px;
+  font-size: 16px;
 }
 
 .second-content {
@@ -89,3 +95,153 @@ h5 {
 	height: 25px;
 }
 
+body, h1{
+    margin: 0;
+}
+#wrapper {
+    align-items: center;
+    justify-content: center;
+}
+
+.header-wrapper {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: 4rem;
+	line-height: 4rem;
+	text-align: left;
+	color: white;
+	z-index: 10;
+	background-color: #111111;
+}
+
+.photo-card {
+	position: relative;
+	z-index: 1;
+	overflow: hidden;
+	margin-top: 6rem;
+}
+
+.textarea-bg {
+	background-color: #1a1a1a;
+}
+
+
+.photo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20rem;
+    overflow: hidden;
+}
+
+.photo-container img {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
+}
+
+.seetranslate {
+	color:#555555;
+}
+
+.view-comment {
+	color:#555555;
+}
+
+.fixed-item {
+    position: fixed;
+    bottom: 0;
+    font-size: 20px;
+}
+.fixed-item a:hover i {
+    color: #dc3545;
+}
+
+.logout {
+	font-size: 25px;
+    line-height: 25px;
+    
+}
+
+.bell{
+      transform-origin: 50% 0%;
+      animation-name: shake;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      animation-delay: 0.5s;
+    }
+    
+    @keyframes shake{
+      0%{
+          transform: rotate(0deg);
+        }
+        10%{
+          transform: rotate(45deg);
+        }
+        20%{
+          transform: rotate(-45deg);
+        }
+        30%{
+          transform: rotate(30deg);
+        }
+        40%{
+          transform: rotate(-30deg);
+        }
+        50%{
+          transform: rotate(10deg);
+        }
+        60%{
+          transform: rotate(-10deg);
+        }
+        70%{
+          transform: rotate(0deg);
+        }
+        100%{
+          transform: rotate(0deg);
+        }
+    }
+    
+.comment-box {
+    position: relative;
+    line-height: 1.5;
+}
+
+.short-text {
+    display: inline;
+}
+
+.full-text {
+    display: inline;
+}
+
+.d-none {
+    display: none;
+}
+
+.btn-container {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+}
+
+.btn-toggle-text {
+    border: none;
+    background: none;
+    color: #0095f6;
+    font-size: 14px;
+    
+}
+
+.btn-hide {
+    display: inline;
+    }
+
+.add-comment {
+	border: none;
+    background: #111111;
+}
