@@ -19,7 +19,7 @@
        					<p class="bell" style="font-size:48px;color:red;">🔔</p>
         				<p class="bell" style="font-size:36px; color:red;">🔔</p>
         				<p class="" style="font-size:50px; font-family: serif;">🎄</p>
-        				<p style="font-size:45px;"> Merry Christmas</p>
+        				<h6 style="font-size:45px;"> <span>M</span><span>e</span><span>r</span><span>r</span><span>y</span> <span>C</span><span>h</span><span>r</span><span>i</span><span>s</span><span>t</span><span>m</span><span>a</span><span>s</span></h6>
         				<p class="" style="font-size:50px;">🎄</p>
         				<p class="bell" style="font-size:36px; color:red;">🔔</p>
         				<p class="bell" style="font-size:48px;color:red;">🔔</p>
@@ -60,74 +60,83 @@
                 </div>
         </header>
 	
-        <div th:each="post:${postList}" class="photo-card border border-secondary rounded" style="width: 33rem; height: 45rem;">
+        <div th:each="card:${cardList}" class="photo-card border border-secondary rounded" style="width: 33rem; height: 45rem;">
                 
                 <div class="d-flex align-items-center p-3">
                 <div class="d-flex mt-">
                     <a href="/user/userpage-view" class="text-decoration-none text-white">
                         <i class="bi bi-person-circle icon-large"></i>
                     </a>
-                    <h5 class="ml-3" ><span class="font-weight">siyuninkorea</span></h5>
+                    <h5 class="ml-3"><span class="font-weight" th:text="${card.loginId}">!User Name!</span></h5>
                     <span class="small mt-1 ml-2"> - 12m</span>
                 </div>
                 <span class="ml-auto"><i class="bi bi-three-dots-vertical"></i></span>
              </div>
              
                 <div class="photo-container mt-3">
-                    <img th:src="${post.imagePath}" 
+                    <img th:src="${card.imagePath}" 
                         alt="Uploaded Image">
                 </div>
                 
                 <div class="line mt-4"></div>
 
                 
-                <div class="p-3">
+                <div class="p-2 ml-1">
                     <div class="d-flex align-items-center">
-                        <i class="bi bi-heart mr-3" style="font-size: 27px;"></i>
+                        <i th:unless="${card.isLike}" class="bi bi-heart like-btn" style="font-size: 27px;" th:data-post-id="${card.postId}"></i>
+                        <i th:if="${card.isLike}" class="bi bi-suit-heart-fill mr-3 text-danger" style="font-size: 27px;"></i>
                         <i class="bi bi-chat-square mr-3" style="font-size: 27px;"></i>
                         <i class="bi bi-send" style="font-size: 27px;"></i>
                     </div>
                     
-                    
-                    <p class="card-text mb-2">
-                        Liked by <span class="font-weight-bold">siyuninkorea</span> and 
-                        <span class="font-weight-bold">125,000</span> others
+                    <div>
+                    <p class="card-text">
+                        Liked by <span class="font-weight-bold" th:text="${card.loginId}">!User Name!</span> and 
+                        <span class="font-weight-bold" th:text="${card.likeCount}">Number of likes</span> others
                         <br>
                         <small class="seetranslate">See translate</small>
                     </p>
+                    </div>
                     
                     
-                    <div class="comment-box d-flex align-items-center mt-2">
+                    <div class="comment-box d-flex align-items-center">
 					    <div class="comment-text">
-					        <span class="font-weight-bold">siyuninkorea</span>
+					        <span class="font-weight-bold" th:text="${card.loginId}">!User Name!</span>
 					        <span class="ml-1">
-					            <span th:text="${post.contents}" class="short-text">
+					            <span th:text="${card.contents}" class="short-text">
 					                You have to let go, Shu. You know I wouldn't ask you if it wasn't safe, right? It could be dangerous...
 					            </span>
-					            <span th:text="${post.contents}" class="full-text d-none">
+					            <span th:text="${card.contents}" class="full-text d-none">
 					                You have to let go, Shu. You know I wouldn't ask you if it wasn't safe, right? It could be dangerous if you don't know how to do this. it could be really really important and I may not there to help you, when that happens I have to make sure you can do it.
 					            </span>
 					        </span>
-					    </div>
-					    
-					    <div class="btn-container d-flex">
-					        <button class="btn-toggle-text btn btn-link p-0" style="text-decoration: none;">더보기</button>
-					        <button class="btn-toggle-text btn btn-link p-0 btn-hide d-none">숨기기</button>
+					        <div class="btn-container d-flex">
+					        <button class="btn-toggle-text btn btn-link" style="text-decoration: none; padding:0;" >more</button>
+					        <button class="btn-toggle-text btn btn-link btn-hide d-none" style="text-decoration: none; padding:0;">hide</button>
 					    </div>
 					</div>
+					    </div>
+					    
 					
 					
-					<div class="d-flex flex-column mt-3">
-					    <div class="view-comments cursor-pointer mt-3">
-					        View all comments
+					<div class="d-flex flex-column mt-4">
+						<div th:each="comment:${card.commentList}" class="mt-1">
+					    	<span th:text="${card.userId}" class="font-weight-bold">User</span> <span th:text="${comment.contents}" > 댓글</span>
+					    </div>
+					    <div class="view-comments cursor-pointer mt-1">
+					       <div>View all comments</div>
 					    </div>
 					   <div class="add-comment mt-2 d-flex flex-column">
 					   <div class="d-flex">
-					    <input 
+					    <input
+					    	th:id="|commentInput${card.postId}|"
 					        type="text" 
 					        class="container text-white p-0" 
 					        style="background-color: #111111; border: none; outline: none; padding-left: 0;" 
-					        placeholder="Add a comment..."><button style="background-color: #111111; border: none; outline: none; color:#0d6efd">post</button></div>
+					        placeholder="Add a comment...">
+					        <button class="comment-btn" th:data-post-id="${card.postId}" style="background-color: #111111; border: none; outline: none; color:#0d6efd">post
+					        </button>
+					     </div>
 					    <span class="line-container mt-2" style="border-top: 1px solid #555555;"></span>
 					</div>
 				</div>
@@ -139,6 +148,54 @@
 </body>
 
 <script layout:fragment="script">
+	
+	$(document).ready(function () {
+		
+		$(".comment-btn").on("click", function() {
+			let postId = $(this).data("post-id");
+			
+			let comment = $("#commentInput" + postId).val();
+			
+			$.ajax({
+				type:"post"
+				, url:"/post/comment/create"
+				, data:{"postId":postId, "contents":comment}
+				, success:function(response) {
+					if(response.result == "success") {
+						location.reload();
+					} else {
+						alert("Something went wrong...please try again.");
+					}
+				}
+				, error:function() {
+					alert("error...");
+					return;
+				}
+			});
+		});
+		
+		$(".like-btn").on("click", function() {
+			let postId = $(this).data("post-id");
+			
+			$.ajax({
+				type:"post"
+				, url:"/post/like"
+				, data:{"postId":postId}
+				, success:function(response) {
+					if(response.result == "success") {
+						location.reload();
+					} else {
+						alert("Something went wrong...please try again.");
+					}
+				}
+				, error:function() {
+					alert("error...");
+					return;	
+				}
+			});
+		});
+	});
+	
     const maxShortText = 120;
     const maxFullText = 180;
 
@@ -163,7 +220,7 @@
             if (isCollapsed) {
                 shortText.classList.remove("d-none");
                 fullText.classList.add("d-none");
-                btnShow.textContent = "더보기";
+                btnShow.textContent = "more";
                 btnHide.classList.add("d-none");
             } else {
                 shortText.classList.add("d-none");
@@ -185,7 +242,7 @@
             fullText.classList.add("d-none");
             btnHide.classList.add("d-none");
             btnShow.classList.remove("d-none");
-            btnShow.textContent = "더보기";
+            btnShow.textContent = "more";
         });
     });
 </script>

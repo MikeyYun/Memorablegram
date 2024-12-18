@@ -39,4 +39,5 @@ public class PostRestController {
 			resultMap.put("result", "false");
 		} return resultMap;
 	}
+	
 }

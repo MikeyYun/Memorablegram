@@ -48,4 +48,19 @@
  			`password` = #{password}
  		
  </select>
+ <select id="selectUserById" parameterType="int"
+ resultType="com.mikeyeom.memorablegram.domain.User">
+ 	SELECT
+ 			`id`
+ 			,`loginId`
+ 			, `password`
+ 			, `name`
+ 			, `email`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`user`
+ 		WHERE
+ 			`id` = #{id}
+ </select>
  </mapper>

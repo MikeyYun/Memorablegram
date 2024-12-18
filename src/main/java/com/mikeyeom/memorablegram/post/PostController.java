@@ -7,8 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.mikeyeom.memorablegram.post.domain.Post;
+import com.mikeyeom.memorablegram.post.dto.CardDTO;
 import com.mikeyeom.memorablegram.post.service.PostService;
+
+import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/post")
 @Controller
@@ -21,11 +23,15 @@ public class PostController {
 	}
 	
 	@GetMapping("/timeline-view")
-	public String timeline(Model model) {
+	public String timeline(
+			Model model
+			, HttpSession session) {
 		
-		List<Post> postList = postService.getPostList();
+		int userId = (Integer)session.getAttribute("userId");
 		
-		model.addAttribute("postList", postList);
+		List<CardDTO> cardList = postService.getPostList(userId);
+		
+		model.addAttribute("cardList", cardList);
 		
 		return "post/timeline";
 	}
