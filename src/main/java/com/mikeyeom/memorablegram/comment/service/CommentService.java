@@ -1,19 +1,25 @@
 package com.mikeyeom.memorablegram.comment.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.mikeyeom.memorablegram.comment.domain.Comment;
+import com.mikeyeom.memorablegram.comment.dto.CommentDto;
 import com.mikeyeom.memorablegram.comment.repository.CommentRepository;
+import com.mikeyeom.memorablegram.domain.User;
+import com.mikeyeom.memorablegram.service.UserService;
 
 @Service
 public class CommentService {
 	
 	private CommentRepository commentRepository;
+	private UserService userService;
 	
-	public CommentService(CommentRepository commentRepository) {
+	public CommentService(CommentRepository commentRepository, UserService userService) {
 		this.commentRepository = commentRepository;
+		this.userService = userService;
 	}
 	
 	public boolean addComment(int postId, int userId, String contents) {
@@ -32,7 +38,28 @@ public class CommentService {
 		}
 	}
 	
-	public List<Comment> getCommentList(int postId) {
-		return commentRepository.findBypostId(postId);
+	public List<CommentDto> getCommentList(int postId) {
+		
+		List<Comment> commentList = commentRepository.findBypostId(postId);
+		
+		List<CommentDto> commentDtoList = new ArrayList<>();
+		
+		for(Comment comment : commentList) {
+			
+			int userId = comment.getUserId();
+			
+			User user = userService.getUserById(userId);
+			
+			CommentDto commentDto = CommentDto.builder()
+			.commentId(comment.getId())
+			.userId(userId)
+			.loginId(user.getLoginId())
+			.contents(comment.getContents())
+			.build();
+			
+			commentDtoList.add(commentDto);
+		}
+		
+		return commentDtoList;
 	}
 }

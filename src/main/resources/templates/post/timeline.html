@@ -56,7 +56,6 @@
 				</li>
 				</ul>
 			</nav>
-
                 </div>
         </header>
 	
@@ -83,7 +82,7 @@
                 
                 <div class="p-2 ml-1">
                     <div class="d-flex align-items-center">
-                        <i th:unless="${card.isLike}" class="bi bi-heart like-btn" style="font-size: 27px;" th:data-post-id="${card.postId}"></i>
+                        <i th:unless="${card.isLike}" class="bi bi-heart like-btn mr-3" style="font-size: 27px;" th:data-post-id="${card.postId}"></i>
                         <i th:if="${card.isLike}" class="bi bi-suit-heart-fill mr-3 text-danger" style="font-size: 27px;"></i>
                         <i class="bi bi-chat-square mr-3" style="font-size: 27px;"></i>
                         <i class="bi bi-send" style="font-size: 27px;"></i>
@@ -98,16 +97,15 @@
                     </p>
                     </div>
                     
-                    
                     <div class="comment-box d-flex align-items-center">
 					    <div class="comment-text">
 					        <span class="font-weight-bold" th:text="${card.loginId}">!User Name!</span>
 					        <span class="ml-1">
 					            <span th:text="${card.contents}" class="short-text">
-					                You have to let go, Shu. You know I wouldn't ask you if it wasn't safe, right? It could be dangerous...
+					                You have to let go, Percy. You know I wouldn't ask you if it wasn't safe, right? It could be dangerous...
 					            </span>
 					            <span th:text="${card.contents}" class="full-text d-none">
-					                You have to let go, Shu. You know I wouldn't ask you if it wasn't safe, right? It could be dangerous if you don't know how to do this. it could be really really important and I may not there to help you, when that happens I have to make sure you can do it.
+					                You have to let go, Percy. You know I wouldn't ask you if it wasn't safe, right? It could be dangerous if you don't know how to do this. it could be really really important and I may not there to help you, when that happens I have to make sure you can do it.
 					            </span>
 					        </span>
 					        <div class="btn-container d-flex">
@@ -117,30 +115,35 @@
 					</div>
 					    </div>
 					    
-					
-					
 					<div class="d-flex flex-column mt-4">
-						<div th:each="comment:${card.commentList}" class="mt-1">
-					    	<span th:text="${card.userId}" class="font-weight-bold">User</span> <span th:text="${comment.contents}" > 댓글</span>
+					    <div th:each="comment, iterStat : ${card.commentList}" 
+					         th:if="${iterStat.index < 1}" 
+					         class="mt-1 d-flex">
+					         <span th:text="${comment.loginId}" class="font-weight-bold">User</span>
+					         <span th:text="${#strings.length(comment.contents) > 50 ? #strings.substring(comment.contents, 0, 50) + '...' : comment.contents}" 
+					         	   class="comment-text ml-1">
+					            	Comment
+					        </span>
 					    </div>
 					    <div class="view-comments cursor-pointer mt-1">
-					       <div>View all comments</div>
+					        <div>View all comments</div>
 					    </div>
-					   <div class="add-comment mt-2 d-flex flex-column">
-					   <div class="d-flex">
-					    <input
-					    	th:id="|commentInput${card.postId}|"
-					        type="text" 
-					        class="container text-white p-0" 
-					        style="background-color: #111111; border: none; outline: none; padding-left: 0;" 
-					        placeholder="Add a comment...">
-					        <button class="comment-btn" th:data-post-id="${card.postId}" style="background-color: #111111; border: none; outline: none; color:#0d6efd">post
-					        </button>
-					     </div>
-					    <span class="line-container mt-2" style="border-top: 1px solid #555555;"></span>
+					    <div class="add-comment mt-2 d-flex flex-column">
+					        <div class="d-flex">
+					            <input
+					                th:id="|commentInput${card.postId}|"
+					                type="text"
+					                class="container text-white p-0" 
+					                style="background-color: #111111; border: none; outline: none; padding-left: 0;" 
+					                placeholder="Add a comment...">
+					            <button class="comment-btn" th:data-post-id="${card.postId}" style="background-color: #111111; border: none; outline: none; color:#0d6efd">
+					                post
+					            </button>
+					        </div>
+					        <span class="line-container mt-2" style="border-top: 1px solid #555555;"></span>
+					    </div>
 					</div>
-				</div>
-			 
+					
 			 </div>
 			 </div>
         

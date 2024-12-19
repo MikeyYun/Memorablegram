@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.mikeyeom.memorablegram.comment.domain.Comment;
+import com.mikeyeom.memorablegram.comment.dto.CommentDto;
 import com.mikeyeom.memorablegram.comment.service.CommentService;
 import com.mikeyeom.memorablegram.common.FileManager;
 import com.mikeyeom.memorablegram.domain.User;
@@ -64,7 +64,7 @@ public class PostService {
 			
 			int likeCount = likeService.getLikeCount(post.getId());
 			boolean isLike = likeService.isLike(post.getId(), loginUserId);
-			List<Comment> commentList = commentService.getCommentList(post.getId());
+			List<CommentDto> commentList = commentService.getCommentList(post.getId());
 			
 			CardDTO card = CardDTO.builder()
 			.postId(post.getId())

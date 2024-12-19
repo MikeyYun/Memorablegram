@@ -2,7 +2,7 @@ package com.mikeyeom.memorablegram.post.dto;
 
 import java.util.List;
 
-import com.mikeyeom.memorablegram.comment.domain.Comment;
+import com.mikeyeom.memorablegram.comment.dto.CommentDto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -22,5 +22,5 @@ public class CardDTO {
 	private int likeCount;
 	private boolean isLike;
 	
-	List<Comment> commentList; 
+	List<CommentDto> commentList; 
 }
