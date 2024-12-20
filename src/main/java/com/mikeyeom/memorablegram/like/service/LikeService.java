@@ -1,5 +1,7 @@
 package com.mikeyeom.memorablegram.like.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.mikeyeom.memorablegram.like.domain.Like;
@@ -25,6 +27,20 @@ public boolean addLike(int postId, int userId) {
 	} catch (Exception e) {
 		return false;
 	}
+	}
+
+	public boolean deleteLike(int userId, int postId) {
+		
+		Optional<Like> optionalLike = likeRepository.findByPostIdAndUserId(postId, userId);
+		
+		if(optionalLike.isPresent()) {
+			Like like = optionalLike.get();
+			
+			likeRepository.delete(like);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public int getLikeCount(int postId){

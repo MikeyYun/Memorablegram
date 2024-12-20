@@ -83,7 +83,7 @@
                 <div class="p-2 ml-1">
                     <div class="d-flex align-items-center">
                         <i th:unless="${card.isLike}" class="bi bi-heart like-btn mr-3" style="font-size: 27px;" th:data-post-id="${card.postId}"></i>
-                        <i th:if="${card.isLike}" class="bi bi-suit-heart-fill mr-3 text-danger" style="font-size: 27px;"></i>
+                        <i th:if="${card.isLike}" class="bi bi-suit-heart-fill mr-3 text-danger unlike-btn" style="font-size: 27px;" th:data-post-id="${card.postId}"></i>
                         <i class="bi bi-chat-square mr-3" style="font-size: 27px;"></i>
                         <i class="bi bi-send" style="font-size: 27px;"></i>
                     </div>
@@ -153,6 +153,27 @@
 <script layout:fragment="script">
 	
 	$(document).ready(function () {
+		
+		$(".unlike-btn").on("click", function () {
+			let postId = $(this).data("post-id");
+			
+			$.ajax({
+				type:"delete"
+				, url:"/post/unlike"
+				, data:{"postId":postId}
+				, success:function(response) {
+					if(response.result == "success") {
+						location.reload();
+					} else {
+						alert("Something went wrong...please try again.");
+					}
+				}
+				, error:function() {
+					alert("error..");	
+				}
+			});
+			
+		});
 		
 		$(".comment-btn").on("click", function() {
 			let postId = $(this).data("post-id");

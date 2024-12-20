@@ -3,6 +3,7 @@ package com.mikeyeom.memorablegram.like;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +31,23 @@ public class LikeRestController {
 		Map<String, String> resultMap = new HashMap<>();
 		
 		if(likeService.addLike(postId, userId)) {
+			resultMap.put("result", "success");
+		} else {
+			resultMap.put("result", "fail");
+		}
+		return resultMap;
+	}
+	
+	@DeleteMapping("/post/unlike")
+	public Map<String, String> unlike(
+		@RequestParam("postId") int postId
+		, HttpSession session) {
+			
+		int userId = (Integer)session.getAttribute("userId");
+		
+		Map<String, String> resultMap = new HashMap<>();
+		
+		if(likeService.deleteLike(userId, postId)) {
 			resultMap.put("result", "success");
 		} else {
 			resultMap.put("result", "fail");
