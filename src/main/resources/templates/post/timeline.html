@@ -10,25 +10,27 @@
 	        
         <header class="header-wrapper">
         	<div class="d-flex flex-column">
-        	
         	<div oncontextmenu="return false" onselectstart="return false" ondragstart="return false" onkeydown="return false">
-        	<div class="d-flex">
-    			<h1 class="memorablegram-title p-4">Memorablegram</h1>
-    			
-    				<div class="d-flex align-items-center" style="gap:7rem;">
-       					<p class="bell" style="font-size:48px;color:red;">🔔</p>
-        				<p class="bell" style="font-size:36px; color:red;">🔔</p>
-        				<p class="" style="font-size:50px; font-family: serif;">🎄</p>
-        				<h6 style="font-size:45px;"> <span>M</span><span>e</span><span>r</span><span>r</span><span>y</span> <span>C</span><span>h</span><span>r</span><span>i</span><span>s</span><span>t</span><span>m</span><span>a</span><span>s</span></h6>
-        				<p class="" style="font-size:50px;">🎄</p>
-        				<p class="bell" style="font-size:36px; color:red;">🔔</p>
-        				<p class="bell" style="font-size:48px;color:red;">🔔</p>
-    				</div>
-    		</div>
-    		</div>
+      <div class="d-flex align-items-center position-relative">
+	    <h1 class="memorablegram-title p-4">Memorablegram</h1>
+	
+	    <div class="d-flex align-items-center" style="gap:7rem;">
+	        <p class="bell" style="font-size:48px;color:red;">🔔</p>
+	        <p class="bell" style="font-size:36px; color:red;">🔔</p>
+	        <p class="" style="font-size:50px; font-family: serif;">🎄</p>
+	        <h6 style="font-size:45px;">
+	            <span>M</span><span>e</span><span>r</span><span>r</span><span>y</span>
+	            <span>C</span><span>h</span><span>r</span><span>i</span><span>s</span><span>t</span><span>m</span><span>a</span><span>s</span>
+	        </h6>
+	        <p class="" style="font-size:50px;">🎄</p>
+	        <p class="bell" style="font-size:36px; color:red;">🔔</p>
+	        <p class="bell" style="font-size:48px;color:red;">🔔</p>
+	   </div>
+	</div>
 			</div>
-
-            <div>
+		</div>
+	<div>
+	
         <nav class="main-menu col-2 ml-3">
 		    <ul class="nav flex-column">
 		        <li class="nav-item menu-item">
@@ -49,10 +51,10 @@
 		            <a href="/user/mypage-view" class="nav-link text-white font-weight-bold" style="font-size: 20px;">
 		            <i class="bi bi-person-circle"></i> Profile</a>
 		        </li>
+		        
 		        <li class="nav-item menu-item fixed-item" title="Log out from your account">
-				    <a href="5" class="nav-link text-white font-weight-bold">
-				        <i class="bi bi-door-closed-fill logout"></i> Log out
-				    </a>
+		        <span th:text="${session.userName}">엄시윤님</span>
+				    <a href="/user/logout" class="text-white text-decoration-none"><i class="bi bi-door-closed-fill logoutBtn"></i> Log out</a>
 				</li>
 				</ul>
 			</nav>
@@ -69,7 +71,7 @@
                     <h5 class="ml-3"><span class="font-weight" th:text="${card.loginId}">!User Name!</span></h5>
                     <span class="small mt-1 ml-2"> - 12m</span>
                 </div>
-                <span class="ml-auto"><i class="bi bi-three-dots-vertical"></i></span>
+                <i class="ml-auto bi bi-three-dots-vertical more-btn" th:data-post-id="${card.postId}"></i>
              </div>
              
                 <div class="photo-container mt-3">
@@ -153,6 +155,27 @@
 <script layout:fragment="script">
 	
 	$(document).ready(function () {
+		
+		$(".more-btn").on("click", function() {
+			
+			let postId = $(this).data("post-id");
+			
+			$.ajax({
+				type:"delete"
+				, url:"/post/delete"
+				, data:{"id":postId}
+				, success:function(response) {
+					if(response.result == "success") {
+						location.reload();
+					} else {
+						alert("Something went wrong...please try again.");
+					}
+				}
+				, error:function() {
+					alert("error...");
+				}
+			});
+		});
 		
 		$(".unlike-btn").on("click", function () {
 			let postId = $(this).data("post-id");

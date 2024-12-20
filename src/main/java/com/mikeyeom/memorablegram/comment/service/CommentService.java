@@ -9,6 +9,7 @@ import com.mikeyeom.memorablegram.comment.domain.Comment;
 import com.mikeyeom.memorablegram.comment.dto.CommentDto;
 import com.mikeyeom.memorablegram.comment.repository.CommentRepository;
 import com.mikeyeom.memorablegram.domain.User;
+import com.mikeyeom.memorablegram.post.repository.PostRepository;
 import com.mikeyeom.memorablegram.service.UserService;
 
 @Service
@@ -36,6 +37,10 @@ public class CommentService {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+	
+	public void deleteCommentByPostId(int postId) {
+		commentRepository.deleteByPostId(postId);
 	}
 	
 	public List<CommentDto> getCommentList(int postId) {

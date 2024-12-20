@@ -2,6 +2,7 @@ package com.mikeyeom.memorablegram.post.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -48,6 +49,31 @@ public class PostService {
 			Post result = postRepository.save(post);
 			return true;
 		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	
+	public boolean deletePost(int id, int userId) {
+		
+		Optional<Post> optionalPost = postRepository.findById(id);
+		
+		if(optionalPost.isPresent()) {
+			Post post = optionalPost.get();
+			
+			if(post.getUserId() == userId) {
+			
+			FileManager.removeFile(post.getImagePath());
+			commentService.deleteCommentByPostId(id);
+			likeService.deleteLikePostId(id);
+			postRepository.delete(post);
+			
+			return true;
+			} else {
+				return false;
+			}
+			
+		} else {
 			return false;
 		}
 	}

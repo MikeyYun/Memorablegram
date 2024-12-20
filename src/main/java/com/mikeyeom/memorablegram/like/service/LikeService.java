@@ -42,6 +42,10 @@ public boolean addLike(int postId, int userId) {
 			return false;
 		}
 	}
+	
+	public void deleteLikePostId(int postId) {
+		likeRepository.deleteByPostId(postId);
+	}
 
 	public int getLikeCount(int postId){
 		return likeRepository.countByPostId(postId);
