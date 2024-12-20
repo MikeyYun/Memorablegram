@@ -71,7 +71,7 @@
                     <h5 class="ml-3"><span class="font-weight" th:text="${card.loginId}">!User Name!</span></h5>
                     <span class="small mt-1 ml-2"> - 12m</span>
                 </div>
-                <i class="ml-auto bi bi-three-dots-vertical more-btn" th:data-post-id="${card.postId}"></i>
+                <i th:if="${card.userId == session.userId}" class="ml-auto bi bi-three-dots-vertical more-btn" th:data-post-id="${card.postId}"  data-toggle="modal" data-target="#moreModal"></i>
              </div>
              
                 <div class="photo-container mt-3">
@@ -149,6 +149,22 @@
 			 </div>
 			 </div>
         
+        	
+			<!-- Modal -->
+			<div class="modal fade" id="moreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered" role="document">
+			    <div class="modal-content">
+			      <div class="modal-body text-center text-dark">
+			        <b>You are about to <span class="text-danger">delete</span> this post. Are you sure?</b>
+			      </div>
+			      <div class="modal-footer">
+			        <a href="#"><button type="button" class="btn delete-btn" id="deleteBtn">Yes</button></a>
+			        <button type="button" class="btn delete-cancel-btn" data-dismiss="modal">No</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+        
     </section>
 </body>
 
@@ -157,6 +173,12 @@
 	$(document).ready(function () {
 		
 		$(".more-btn").on("click", function() {
+			
+			let postId = $(this).data("post-id");
+			$("#deleteBtn").data("post-id", postId);
+		});
+		
+		$("#deleteBtn").on("click", function() {
 			
 			let postId = $(this).data("post-id");
 			
@@ -178,7 +200,7 @@
 		});
 		
 		$(".unlike-btn").on("click", function () {
-			let postId = $(this).data("post-id");
+			// let postId = $(this).data("post-id");
 			
 			$.ajax({
 				type:"delete"
