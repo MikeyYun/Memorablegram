@@ -69,7 +69,6 @@
                         <i class="bi bi-person-circle icon-large"></i>
                     </a>
                     <h5 class="ml-3"><span class="font-weight" th:text="${card.loginId}">!User Name!</span></h5>
-                    <span class="small mt-1 ml-2"> - 12m</span>
                 </div>
                 <i th:if="${card.userId == session.userId}" class="ml-auto bi bi-three-dots-vertical more-btn" th:data-post-id="${card.postId}"  data-toggle="modal" data-target="#moreModal"></i>
              </div>

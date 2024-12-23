@@ -291,13 +291,13 @@ h6 span:nth-child(8) { animation-delay: .7s; }
 }
 
 .delete-btn:hover {
-    background-color: red; /* 버튼 배경색 빨간색 */
-    color: white; /* 텍스트 색상 흰색 */
-    border-color: black; /* 테두리 색상도 빨간색으로 변경 */
+    background-color: red;
+    color: white;
+    border-color: black;
   }
   
  .delete-cancel-btn:hover {
-	background-color: #0095f6; /* 버튼 배경색 빨간색 */
-    color: white; /* 텍스트 색상 흰색 */
-    border-color: black; /* 테두리 색상도 빨간색으로 변경 */
+	background-color: #0095f6;
+    color: white;
+    border-color: black;
  }
